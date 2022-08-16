@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">>
+<head th:insert="Layout/Layout.html :: layoutCSS">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <!-- Title Page-->
+    <title>Province List</title>
+</head>
+<body class="animsition" data-animsition-in-class="fade-in"
+      data-animsition-in-duration="500"
+      data-animsition-out-class="fade-out"
+      data-animsition-out-duration="500">
+<div class="page-wrapper">
+    <header th:insert="Layout/Layout.html :: headerMobile"></header>
+    <!-- MENU SIDEBAR-->
+    <aside th:insert="Layout/Layout.html :: sidebar"></aside>
+    <!-- END MENU SIDEBAR-->
+    <!-- PAGE CONTAINER-->
+    <div class="page-container">
+        <!-- HEADER DESKTOP-->
+        <header th:insert="Layout/Layout.html :: header">
+        </header>
+        <!-- HEADER DESKTOP-->
+        <!-- MAIN CONTENT-->
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- DATA TABLE -->
+                            <h3 class="title-5 m-b-35">data table</h3>
+                            <div class="table-data__tool">
+                                <div class="table-data__tool-left">
+                                    <div class="rs-select2--light rs-select2--md">
+                                        <select class="js-select2" name="property" >
+                                            <option ><a href="/"></a>All</option>
+                                            <option ><a href="/Province/AscGDP"></a>GDP ASC</option>
+                                            <option>Offline</option>
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
+                                    </div>
+                                    <button class="au-btn-filter">
+                                        <i class="zmdi zmdi-filter-list"></i>filters
+                                    </button>
+                                </div>
+                                <div class="table-data__tool-right">
+                                    <button class="au-btn au-btn-icon au-btn--green au-btn--small"
+                                            data-toggle="modal" data-target="#largeModal">
+                                        <i class="zmdi zmdi-plus"></i>add item
+                                    </button>
+                                    <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                                        <select class="js-select2" name="type">
+                                            <option selected="selected">Excel</option>
+                                            <option value="">Option 2</option>
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive table-responsive-data2">
+                                <table class="table table-data3">
+                                    <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Ava</th>
+                                        <th>Name</th>
+                                        <th>Popular</th>
+                                        <th>Area</th>
+                                        <th>GDP</th>
+                                        <th>Country</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="tr-shadow" th:each="p,status:${provinces}">
+                                        <td th:text="${status.count}"></td>
+                                        <td><img class="img-120" th:src="${'/image/'+p.getPicture_province()}"></td>
+                                        <td th:text="${p.getName_province()}"></td>
+                                        <td th:text="${p.getPopular_province()}"></td>
+                                        <td th:text="${p.getArea_province()}"></td>
+                                        <td th:text="${p.getGdp_province()}"></td>
+                                        <td th:text="${p.getCountry().getName_Country()}"></td>
+                                        <td>
+                                            <div class="table-data-feature">
+                                                <button class="item" data-toggle="tooltip"
+                                                        data-placement="top" title="Info">
+                                                    <a th:href="@{/Province/View/{id}(id=${p.getId_province()})}">
+                                                        <i class="zmdi zmdi-info"></i></a>
+                                                </button>
+                                                <button class="item" data-toggle="tooltip"
+                                                        data-placement="top" title="Edit">
+                                                    <a th:href="@{/Province/Edit/{id}(id=${p.getId_province()})}">
+                                                        <i class="fa fa-edit"></i></a>
+                                                </button>
+                                                <button class="item" data-toggle="tooltip"
+                                                        data-placement="top" title="Delete">
+                                                    <a th:href="@{/Province/Delete/{id}(id=${p.getId_province()})}">
+                                                        <i class="fa fa-ban"></i></a>
+                                                </button>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="spacer"></tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr th:colspan="8">
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <!-- END DATA TABLE -->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a
+                                            href="https://colorlib.com">Colorlib</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+    </div>
+
+    <!-- modal large -->
+    <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="largeModalLabel">Large Modal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="createProductForm" method="post" class="form-horizontal" enctype="multipart/form-data"
+                          th:object="${newProvince}" >
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="name-province-input" class=" form-control-label">Name province</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="name-province-input" name="nameProvince" placeholder="Name"
+                                       class="form-control" th:field="*{name_province}">
+                                <small class="form-text text-muted"> Enter name province please</small>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="popular-province-input" class=" form-control-label">popular province</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="popular-province-input" name="gdpProvince" placeholder="Name"
+                                       class="form-control" th:field="*{popular_province}">
+                                <small class="form-text text-muted"> Enter popular province please</small>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="area-province-input" class=" form-control-label">area province</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="area-province-input" name="areaProvince" placeholder="area"
+                                       class="form-control" th:field="*{area_province}">
+                                <small class="form-text text-muted"> Enter area province please</small>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="gdp-province-input" class=" form-control-label">gdp province</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="gdp-province-input" name="gdpProvince" placeholder="Name"
+                                       class="form-control" th:field="*{gdp_province}">
+                                <small class="form-text text-muted"> Enter gdp province please</small>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="select" class=" form-control-label">Country</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <select name="select" id="select" class="form-control" th:field="*{country}">
+                                    <option th:each="c:${countries}" th:value="${c.getId_country()}"
+                                    th:text="${c.getName_Country()}"></option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="file-input" class=" form-control-label">File input</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="file" id="file-input" name="pictureProduct" class="form-control-file"
+                                       th:field="*{image}">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-secondary" data-dismiss="modal" form="createProductForm">Reset
+                    </button>
+                    <button type="submit" class="btn btn-primary" form="createProductForm">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal large -->
+
+<!-- modal large -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel"
+     aria-hidden="true" th:if="${displayEdit}">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Large Modal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editProvince" method="post" class="form-horizontal" enctype="multipart/form-data"
+                      th:object="${provinceEdit}" >
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="name-province-input-edit" class=" form-control-label">Name province</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <input type="text" id="name-province-input-edit" name="nameProvince" placeholder="Name"
+                                   class="form-control" th:field="*{name_province}">
+                            <small class="form-text text-muted"> Enter name province please</small>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="popular-province-input-edit" class=" form-control-label">popular province</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <input type="text" id="popular-province-input-edit" name="gdpProvince" placeholder="Name"
+                                   class="form-control" th:field="*{popular_province}">
+                            <small class="form-text text-muted"> Enter popular province please</small>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="area-province-input-edit" class=" form-control-label">area province</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <input type="text" id="area-province-input-edit" name="areaProvince" placeholder="area"
+                                   class="form-control" th:field="*{area_province}">
+                            <small class="form-text text-muted"> Enter area province please</small>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="gdp-province-input" class=" form-control-label">gdp province</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <input type="text" id="gdp-province-input-edit" name="gdpProvince" placeholder="Name"
+                                   class="form-control" th:field="*{gdp_province}">
+                            <small class="form-text text-muted"> Enter gdp province please</small>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="select" class=" form-control-label">Country</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <select name="select" id="selectEdit" class="form-control" th:field="*{country}">
+                                <option th:each="c:${countries}" th:value="${c.getId_country()}"
+                                        th:text="${c.getName_Country()}"></option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="file-input" class=" form-control-label">File input</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <input type="file" id="file-input-edit" name="pictureProduct" class="form-control-file"
+                                   th:field="*{image}">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="reset" class="btn btn-secondary" data-dismiss="modal" form="editProvince">Reset
+                </button>
+                <button type="submit" class="btn btn-primary" form="createProductForm">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!--JS-->
+<div th:insert="Layout/Layout.html :: layoutJS">
+</div>
+<div th:if="displayEdit">
+    <script type="text/javascript">
+        $(window).on('load', function () {
+            $('#editModal').modal('show');
+        });
+    </script>
+</div>
+<!--end JS-->
+</body>
+</html>

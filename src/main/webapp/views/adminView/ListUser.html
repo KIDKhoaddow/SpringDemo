@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="Layout/Layout.html :: layoutCSS">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <!-- Title Page-->
+    <title>User List</title>
+</head >
+<body class="animsition" data-animsition-in-class="fade-in"
+      data-animsition-in-duration="500"
+      data-animsition-out-class="fade-out"
+      data-animsition-out-duration="500">
+<div class="page-wrapper">
+    <header th:insert="Layout/Layout.html :: headerMobile"></header>
+    <!-- MENU SIDEBAR-->
+    <aside th:insert="Layout/Layout.html :: sidebar"></aside>
+    <!-- END MENU SIDEBAR-->
+    <!-- PAGE CONTAINER-->
+    <div class="page-container">
+        <!-- HEADER DESKTOP-->
+        <header th:insert="Layout/Layout.html :: header">
+        </header>
+        <!-- HEADER DESKTOP-->
+        <!-- MAIN CONTENT-->
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- DATA TABLE -->
+                            <h3 class="title-5 m-b-35">data table</h3>
+                            <div class="table-data__tool">
+                                <div class="table-data__tool-left">
+                                    <div class="rs-select2--light rs-select2--md">
+                                        <select class="js-select2" name="property">
+                                            <option selected="selected">All</option>
+                                            <option value="">Online</option>
+                                            <option value="">Offline</option>
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
+                                    </div>
+                                    <button class="au-btn-filter">
+                                        <i class="zmdi zmdi-filter-list"></i>filters
+                                    </button>
+                                </div>
+                                <div class="table-data__tool-right">
+                                    <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                                        <select class="js-select2" name="type">
+                                            <option selected="selected">Excel</option>
+                                            <option value="">Option 2</option>
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive table-responsive-data2">
+                                <table class="table table-data3">
+                                    <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Avatar</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Last Login</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="tr-shadow">
+                                        <td>1</td>
+                                        <td></td>
+                                        <td>
+                                            lori@example.com
+                                        </td>
+                                        <td>0976264830</td>
+                                        <td>2018-09-27 02:12</td>
+                                        <td>
+                                            <span class="status--process">Online</span>
+                                        </td>
+                                        <td>
+                                            <div class="table-data-feature">
+                                                <button class="item" data-toggle="tooltip"
+                                                        data-placement="top" title="Info">
+                                                    <i class="zmdi zmdi-info"></i>
+                                                </button>
+                                                <button class="item" data-toggle="tooltip"
+                                                        data-placement="top" title="Ban">
+                                                    <i class="fa fa-ban"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="spacer"></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- END DATA TABLE -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="copyright">
+                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a
+                                        href="https://colorlib.com">Colorlib</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END MAIN CONTENT-->
+        <!-- END PAGE CONTAINER-->
+    </div>
+</div>
+
+
+<!--JS-->
+<div th:insert="Layout/Layout.html :: layoutJS">
+</div>
+<!--end JS-->
+</body>
+</html>

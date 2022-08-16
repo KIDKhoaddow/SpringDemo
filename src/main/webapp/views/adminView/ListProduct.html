@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">>
+<head th:insert="Layout/Layout.html :: layoutCSS">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <!-- Title Page-->
+    <title>Product List</title>
+</head>
+<body class="animsition" data-animsition-in-class="fade-in"
+      data-animsition-in-duration="500"
+      data-animsition-out-class="fade-out"
+      data-animsition-out-duration="500">
+<div class="page-wrapper">
+    <header th:insert="Layout/Layout.html :: headerMobile"></header>
+    <!-- MENU SIDEBAR-->
+    <aside th:insert="Layout/Layout.html :: sidebar"></aside>
+    <!-- END MENU SIDEBAR-->
+    <!-- PAGE CONTAINER-->
+    <div class="page-container">
+        <!-- HEADER DESKTOP-->
+        <header th:insert="Layout/Layout.html :: header">
+        </header>
+        <!-- HEADER DESKTOP-->
+        <!-- MAIN CONTENT-->
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- DATA TABLE -->
+                            <h3 class="title-5 m-b-35">data table</h3>
+                            <div class="table-data__tool">
+                                <div class="table-data__tool-left">
+                                    <div class="rs-select2--light rs-select2--md">
+                                        <select class="js-select2" name="property">
+                                            <option selected="selected">All</option>
+                                            <option value="">Online</option>
+                                            <option value="">Offline</option>
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
+                                    </div>
+                                    <button class="au-btn-filter">
+                                        <i class="zmdi zmdi-filter-list"></i>filters
+                                    </button>
+                                </div>
+                                <div class="table-data__tool-right">
+                                    <button class="au-btn au-btn-icon au-btn--green au-btn--small"
+                                            data-toggle="modal" data-target="#largeModal">
+                                        <i class="zmdi zmdi-plus"></i>add item
+                                    </button>
+                                    <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                                        <select class="js-select2" name="type">
+                                            <option selected="selected">Excel</option>
+                                            <option value="">Option 2</option>
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive table-responsive-data2">
+                                <table class="table table-data3">
+                                    <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Name</th>
+                                        <th>Describe</th>
+                                        <th>Picture</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="tr-shadow" th:each="c:${products}">
+                                        <td th:text="${c.getId()}"></td>
+                                        <td th:text="${c.getNameProduct()}"></td>
+                                        <td th:text="${c.getDescribeProduct()}"></td>
+                                        <td th:text="${c.getPictureProduct()}"></td>
+                                        <td>
+                                            <div class="table-data-feature">
+                                                <button class="item" data-toggle="tooltip"
+                                                        data-placement="top" title="Info">
+                                                    <a th:href="@{/{id}(id=${c.getId()})}">
+                                                        <i class="zmdi zmdi-info"></i></a>
+                                                </button>
+                                                <button class="item" data-toggle="tooltip"
+                                                        data-placement="top" title="Edit">
+                                                    <a th:href="@{/{id}(id=${c.getId()})}">
+                                                        <i class="fa fa-edit"></i></a>
+                                                </button>
+                                                <button class="item" data-toggle="tooltip"
+                                                        data-placement="top" title="Ban">
+                                                    <a th:href="@{/{id}(id=${c.getId()})}">
+                                                        <i class="fa fa-ban"></i></a>
+                                                </button>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="spacer"></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- END DATA TABLE -->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a
+                                            href="https://colorlib.com">Colorlib</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+    </div>
+
+    <!-- modal large -->
+    <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="largeModalLabel">Large Modal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="createProductForm" method="post" class="form-horizontal" enctype="multipart/form-data"
+                          th:object="${NewProduct}">
+                        <input th:type="hidden" name="id" th:field="*{id}">
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="name-product-input" class=" form-control-label">Name Product</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="name-product-input" name="nameProduct" placeholder="Name"
+                                       class="form-control" th:field="*{nameProduct}">
+                                <small class="form-text text-muted"> Enter name product please</small>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="describe-input" class=" form-control-label">Describe</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="describe-input" name="describeProduct" placeholder="Describe"
+                                       class="form-control" th:field="*{describeProduct}">
+                                <small class="form-text text-muted">Enter describe please</small>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="file-input" class=" form-control-label">File input</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="file" id="file-input" name="pictureProduct" class="form-control-file"
+                                       th:field="*{image}">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-secondary" data-dismiss="modal" form="createProductForm">Reset
+                    </button>
+                    <button type="submit" class="btn btn-primary" form="createProductForm">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal large -->
+<!--JS-->
+<div th:insert="Layout/Layout.html :: layoutJS">
+</div>
+<!--end JS-->
+</body>
+</html>
